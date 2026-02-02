@@ -4,17 +4,18 @@
 
 {% block content %}
 
-<section class="text-center vh-100 d-flex align-items-center">
+<section class="text-center py-5 d-flex align-items-center">
     <div class="w-100">
 
         {% if profile.profile_image %}
             <img src="{{ profile.profile_image.url }}"
                  class="rounded-circle mb-4 shadow"
-                 width="150">
+                 width="150"
+                 alt="Profile Image">
         {% endif %}
 
         <h1 class="fw-bold">{{ profile.name }}</h1>
-        <h4 class="text-secondary">{{ profile.role }}</h4>
+        <h4 class="text-secondary mt-2">{{ profile.role }}</h4>
 
         <p class="mt-4 mx-auto w-75">
             {{ profile.bio }}
@@ -24,13 +25,17 @@
             {% if profile.github %}
                 <a href="{{ profile.github }}"
                    class="btn btn-dark me-2"
-                   target="_blank">GitHub</a>
+                   target="_blank">
+                    GitHub
+                </a>
             {% endif %}
 
             {% if profile.linkedin %}
                 <a href="{{ profile.linkedin }}"
                    class="btn btn-outline-dark me-2"
-                   target="_blank">LinkedIn</a>
+                   target="_blank">
+                    LinkedIn
+                </a>
             {% endif %}
 
             {% if profile.resume %}
