@@ -1,0 +1,28 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{ profile.name }} | Contact{% endblock %}
+
+{% block content %}
+
+<section class="text-center my-5">
+    <h2 class="fw-bold mb-4">Contact Me</h2>
+
+    <p class="fs-5">📧 {{ profile.email }}</p>
+    <p class="fs-5">📞 {{ profile.phone }}</p>
+
+    <div class="mt-4">
+        {% if profile.linkedin %}
+            <a href="{{ profile.linkedin }}"
+               class="btn btn-outline-dark me-2"
+               target="_blank">LinkedIn</a>
+        {% endif %}
+
+        {% if profile.github %}
+            <a href="{{ profile.github }}"
+               class="btn btn-dark"
+               target="_blank">GitHub</a>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock %}

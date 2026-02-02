@@ -1,0 +1,83 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{ profile.name }} | Projects{% endblock %}
+
+{% block content %}
+
+<!-- ================= SKILLS ================= -->
+<section class="mb-5">
+    <h2 class="text-center fw-semibold mb-4" style="font-size:1.6rem;">
+        Skills
+    </h2>
+
+    <!-- constrained width for better scan -->
+    <div class="container px-4">
+
+        <div class="row g-3 justify-content-center">
+            {% for skill in skills %}
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                    <div class="card h-100 text-center py-3 px-3">
+                        <div class="text-secondary mb-1"
+                             style="font-size:0.75rem; letter-spacing:0.5px;">
+                            {{ skill.category }}
+                        </div>
+                        <div style="font-size:0.95rem; font-weight:500;">
+                            {{ skill.name }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</section>
+
+<!-- ================= PROJECTS ================= -->
+<section>
+    <h2 class="text-center fw-semibold mb-4" style="font-size:1.6rem;">
+        Projects
+    </h2>
+
+    <div class="row">
+        {% for project in projects %}
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="fw-semibold mb-2"
+                            style="font-size:1.05rem;">
+                            {{ project.title }}
+                        </h5>
+
+                        <p style="font-size:0.9rem; line-height:1.5;">
+                            {{ project.description }}
+                        </p>
+
+                        <span class="text-secondary"
+                              style="font-size:0.75rem;">
+                            {{ project.tech_stack }}
+                        </span>
+                    </div>
+
+                    <div class="card-footer bg-transparent pt-2">
+                        {% if project.github_link %}
+                            <a href="{{ project.github_link }}"
+                               class="btn btn-sm btn-dark"
+                               target="_blank">
+                                GitHub
+                            </a>
+                        {% endif %}
+                        {% if project.live_link %}
+                            <a href="{{ project.live_link }}"
+                               class="btn btn-sm btn-outline-dark ms-2"
+                               target="_blank">
+                                Live
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}
