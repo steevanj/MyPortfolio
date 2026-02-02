@@ -4,16 +4,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    path('Steve@123/', admin.site.urls),   # ✅ ALWAYS AVAILABLE
     path('', include('core.urls')),
 ]
 
-# ✅ Admin available ONLY in development
-if settings.DEBUG:
-    urlpatterns += [
-        path('Steve@123/', admin.site.urls),
-    ]
-
-# ✅ Serve media files in development
+# Serve media files (local dev only)
 if settings.DEBUG:
     urlpatterns += static(
         settings.MEDIA_URL,
