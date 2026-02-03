@@ -1,9 +1,8 @@
 """
 Django settings for config project.
-Deployment-ready configuration (Render + Gunicorn + WhiteNoise)
+PythonAnywhere deployment configuration
 """
-from dotenv import load_dotenv
-load_dotenv()
+
 from pathlib import Path
 import os
 
@@ -12,22 +11,16 @@ import os
 # --------------------------------------------------
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # --------------------------------------------------
 # SECURITY
 # --------------------------------------------------
+SECRET_KEY = "django-insecure-change-this-later"
 
-# Use environment variable in production
-SECRET_KEY = os.getenv(
-    "DJANGO_SECRET_KEY",
-    "unsafe-dev-key-change-this"
-)
+DEBUG = False
 
-# DEBUG should be False in production
-DEBUG = os.getenv("DEBUG", "False") == "True"
-
-ALLOWED_HOSTS = ["*"]  # OK for Render portfolios
-
+ALLOWED_HOSTS = [
+    "steve53.pythonanywhere.com"
+]
 
 # --------------------------------------------------
 # APPLICATIONS
@@ -39,20 +32,14 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
     "core",
 ]
-
 
 # --------------------------------------------------
 # MIDDLEWARE
 # --------------------------------------------------
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-
-    # WhiteNoise for static files in production
-    "whitenoise.middleware.WhiteNoiseMiddleware",
-
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -61,13 +48,11 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-
 # --------------------------------------------------
 # URLS & WSGI
 # --------------------------------------------------
 ROOT_URLCONF = "config.urls"
 WSGI_APPLICATION = "config.wsgi.application"
-
 
 # --------------------------------------------------
 # TEMPLATES
@@ -88,9 +73,8 @@ TEMPLATES = [
     },
 ]
 
-
 # --------------------------------------------------
-# DATABASE (SQLite is fine for portfolio)
+# DATABASE (SQLite OK for portfolio)
 # --------------------------------------------------
 DATABASES = {
     "default": {
@@ -98,18 +82,6 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
-
-
-# --------------------------------------------------
-# PASSWORD VALIDATION
-# --------------------------------------------------
-AUTH_PASSWORD_VALIDATORS = [
-    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
-    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
-]
-
 
 # --------------------------------------------------
 # INTERNATIONALIZATION
@@ -119,35 +91,17 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
 
-
 # --------------------------------------------------
-# STATIC FILES (IMPORTANT FOR RENDER)
+# STATIC FILES
 # --------------------------------------------------
-# -----------------------------
-# STATIC FILES (REQUIRED FOR RENDER)
-# -----------------------------
-STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-
-STATICFILES_STORAGE = (
-    'whitenoise.storage.CompressedManifestStaticFilesStorage'
-)
-
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # --------------------------------------------------
 # MEDIA FILES
 # --------------------------------------------------
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
-
-
-# --------------------------------------------------
-# SECURITY HEADERS (SAFE DEFAULTS)
-# --------------------------------------------------
-SECURE_BROWSER_XSS_FILTER = True
-SECURE_CONTENT_TYPE_NOSNIFF = True
-X_FRAME_OPTIONS = "DENY"
-
 
 # --------------------------------------------------
 # DEFAULT PRIMARY KEY
